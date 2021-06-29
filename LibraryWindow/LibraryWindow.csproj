@@ -1,0 +1,186 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\background.png" />
+    <None Remove="Images\blackjacklogo.png" />
+    <None Remove="Images\Cards\AceClubs.png" />
+    <None Remove="Images\Cards\AceDiamonds.png" />
+    <None Remove="Images\Cards\AceHearts.png" />
+    <None Remove="Images\Cards\AceSpades.png" />
+    <None Remove="Images\Cards\BackBlue.png" />
+    <None Remove="Images\Cards\BackRed.png" />
+    <None Remove="Images\Cards\EightClubs.png" />
+    <None Remove="Images\Cards\EightDiamonds.png" />
+    <None Remove="Images\Cards\EightHearts.png" />
+    <None Remove="Images\Cards\EightSpades.png" />
+    <None Remove="Images\Cards\FiveClubs.png" />
+    <None Remove="Images\Cards\FiveDiamonds.png" />
+    <None Remove="Images\Cards\FiveHearts.png" />
+    <None Remove="Images\Cards\FiveSpades.png" />
+    <None Remove="Images\Cards\FourClubs.png" />
+    <None Remove="Images\Cards\FourDiamonds.png" />
+    <None Remove="Images\Cards\FourHearts.png" />
+    <None Remove="Images\Cards\FourSpades.png" />
+    <None Remove="Images\Cards\JackClubs.png" />
+    <None Remove="Images\Cards\JackDiamonds.png" />
+    <None Remove="Images\Cards\JackHearts.png" />
+    <None Remove="Images\Cards\JackSpades.png" />
+    <None Remove="Images\Cards\KingClubs.png" />
+    <None Remove="Images\Cards\KingDiamonds.png" />
+    <None Remove="Images\Cards\KingHearts.png" />
+    <None Remove="Images\Cards\KingSpades.png" />
+    <None Remove="Images\Cards\NineClubs.png" />
+    <None Remove="Images\Cards\NineDiamonds.png" />
+    <None Remove="Images\Cards\NineHearts.png" />
+    <None Remove="Images\Cards\NineSpades.png" />
+    <None Remove="Images\Cards\QueenClubs.png" />
+    <None Remove="Images\Cards\QueenDiamonds.png" />
+    <None Remove="Images\Cards\QueenHearts.png" />
+    <None Remove="Images\Cards\QueenSpades.png" />
+    <None Remove="Images\Cards\SevenClubs.png" />
+    <None Remove="Images\Cards\SevenDiamonds.png" />
+    <None Remove="Images\Cards\SevenHearts.png" />
+    <None Remove="Images\Cards\SevenSpades.png" />
+    <None Remove="Images\Cards\SixClubs.png" />
+    <None Remove="Images\Cards\SixDiamonds.png" />
+    <None Remove="Images\Cards\SixHearts.png" />
+    <None Remove="Images\Cards\SixSpades.png" />
+    <None Remove="Images\Cards\TenClubs.png" />
+    <None Remove="Images\Cards\TenDiamonds.png" />
+    <None Remove="Images\Cards\TenHearts.png" />
+    <None Remove="Images\Cards\TenSpades.png" />
+    <None Remove="Images\Cards\ThreeClubs.png" />
+    <None Remove="Images\Cards\ThreeDiamonds.png" />
+    <None Remove="Images\Cards\ThreeHearts.png" />
+    <None Remove="Images\Cards\ThreeSpades.png" />
+    <None Remove="Images\Cards\TwoClubs.png" />
+    <None Remove="Images\Cards\TwoDiamonds.png" />
+    <None Remove="Images\Cards\TwoHearts.png" />
+    <None Remove="Images\Cards\TwoSpades.png" />
+    <None Remove="Images\liarsdice.png" />
+    <None Remove="Images\Main\Account.png" />
+    <None Remove="Images\Main\streep.png" />
+    <None Remove="Images\Main\token.png" />
+    <None Remove="Images\Main\wheel.png" />
+    <None Remove="Images\Seven.png" />
+    <None Remove="Images\wheel.png" />
+    <None Remove="Images\WheelOfFortune\arrow.png" />
+    <None Remove="Images\WheelOfFortune\wheel.png" />
+    <None Remove="Images\WheelOfFortune\wheel2.png" />
+    <None Remove="Images\WheelOfFortune\wheel3.png" />
+    <None Remove="Images\WheelOfFortune\wheel4.png" />
+    <None Remove="Images\WheelOfFortune\wheel5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Cards\AceClubs.png" />
+    <EmbeddedResource Include="Images\Cards\AceDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\AceHearts.png" />
+    <EmbeddedResource Include="Images\Cards\AceSpades.png" />
+    <EmbeddedResource Include="Images\Cards\BackBlue.png" />
+    <EmbeddedResource Include="Images\Cards\BackRed.png" />
+    <EmbeddedResource Include="Images\Cards\EightClubs.png" />
+    <EmbeddedResource Include="Images\Cards\EightDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\EightHearts.png" />
+    <EmbeddedResource Include="Images\Cards\EightSpades.png" />
+    <EmbeddedResource Include="Images\Cards\FiveClubs.png" />
+    <EmbeddedResource Include="Images\Cards\FiveDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\FiveHearts.png" />
+    <EmbeddedResource Include="Images\Cards\FiveSpades.png" />
+    <EmbeddedResource Include="Images\Cards\FourClubs.png" />
+    <EmbeddedResource Include="Images\Cards\FourDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\FourHearts.png" />
+    <EmbeddedResource Include="Images\Cards\FourSpades.png" />
+    <EmbeddedResource Include="Images\Cards\JackClubs.png" />
+    <EmbeddedResource Include="Images\Cards\JackDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\JackHearts.png" />
+    <EmbeddedResource Include="Images\Cards\JackSpades.png" />
+    <EmbeddedResource Include="Images\Cards\KingClubs.png" />
+    <EmbeddedResource Include="Images\Cards\KingDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\KingHearts.png" />
+    <EmbeddedResource Include="Images\Cards\KingSpades.png" />
+    <EmbeddedResource Include="Images\Cards\NineClubs.png" />
+    <EmbeddedResource Include="Images\Cards\NineDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\NineHearts.png" />
+    <EmbeddedResource Include="Images\Cards\NineSpades.png" />
+    <EmbeddedResource Include="Images\Cards\QueenClubs.png" />
+    <EmbeddedResource Include="Images\Cards\QueenDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\QueenHearts.png" />
+    <EmbeddedResource Include="Images\Cards\QueenSpades.png" />
+    <EmbeddedResource Include="Images\Cards\SevenClubs.png" />
+    <EmbeddedResource Include="Images\Cards\SevenDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\SevenHearts.png" />
+    <EmbeddedResource Include="Images\Cards\SevenSpades.png" />
+    <EmbeddedResource Include="Images\Cards\SixClubs.png" />
+    <EmbeddedResource Include="Images\Cards\SixDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\SixHearts.png" />
+    <EmbeddedResource Include="Images\Cards\SixSpades.png" />
+    <EmbeddedResource Include="Images\Cards\TenClubs.png" />
+    <EmbeddedResource Include="Images\Cards\TenDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\TenHearts.png" />
+    <EmbeddedResource Include="Images\Cards\TenSpades.png" />
+    <EmbeddedResource Include="Images\Cards\ThreeClubs.png" />
+    <EmbeddedResource Include="Images\Cards\ThreeDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\ThreeHearts.png" />
+    <EmbeddedResource Include="Images\Cards\ThreeSpades.png" />
+    <EmbeddedResource Include="Images\Cards\TwoClubs.png" />
+    <EmbeddedResource Include="Images\Cards\TwoDiamonds.png" />
+    <EmbeddedResource Include="Images\Cards\TwoHearts.png" />
+    <EmbeddedResource Include="Images\Cards\TwoSpades.png" />
+    <EmbeddedResource Include="Images\Main\account.png" />
+    <EmbeddedResource Include="Images\Main\background.png" />
+    <EmbeddedResource Include="Images\Main\blackjacklogo.png" />
+    <EmbeddedResource Include="Images\Main\liarsdice.png" />
+    <EmbeddedResource Include="Images\Main\seven.png" />
+    <EmbeddedResource Include="Images\Main\streep.png" />
+    <EmbeddedResource Include="Images\Main\token.png" />
+    <EmbeddedResource Include="Images\Main\wheel.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\arrow.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\wheel.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\wheel2.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\wheel3.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\wheel4.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\wheel5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="morelinq" Version="3.3.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\WheelOfFortune.xaml.cs">
+      <DependentUpon>WheelOfFortune.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\BlackJackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\LiarDicePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SlotmachinePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\WheelOfFortune.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
