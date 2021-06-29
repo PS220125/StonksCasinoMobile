@@ -8,17 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using LibraryWindow.Classes;
 using LibraryWindow.Classes.Main;
 using LibraryWindow.classes.Main;
 using LibraryWindow.classes.Api;
+using Xamarin.Essentials;
 
 namespace LibraryWindow
 {
     public partial class MainPage : ContentPage
     {
-        MenuButtons _menuButton = new MenuButtons();
-
         public string Username
         {
             get { return User.Username; }
@@ -93,8 +91,9 @@ namespace LibraryWindow
 
         private async void Uitloggen_Pressed(object sender, EventArgs e)
         {
-
-            _menuButton.Uitloggen();
+            Preferences.Remove("user_name");
+            Preferences.Remove("pass_word");
+            Preferences.Remove("remember");
 
             bool logout = await User.LogoutAsync();
             if (logout)

@@ -69,6 +69,7 @@
     <None Remove="Images\Cards\TwoSpades.png" />
     <None Remove="Images\liarsdice.png" />
     <None Remove="Images\Main\Account.png" />
+    <None Remove="Images\Main\backArrow.png" />
     <None Remove="Images\Main\streep.png" />
     <None Remove="Images\Main\token.png" />
     <None Remove="Images\Main\wheel.png" />
@@ -138,6 +139,7 @@
     <EmbeddedResource Include="Images\Cards\TwoHearts.png" />
     <EmbeddedResource Include="Images\Cards\TwoSpades.png" />
     <EmbeddedResource Include="Images\Main\account.png" />
+    <EmbeddedResource Include="Images\Main\backArrow.png" />
     <EmbeddedResource Include="Images\Main\background.png" />
     <EmbeddedResource Include="Images\Main\blackjacklogo.png" />
     <EmbeddedResource Include="Images\Main\liarsdice.png" />
@@ -156,6 +158,7 @@
   <ItemGroup>
     <PackageReference Include="morelinq" Version="3.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>

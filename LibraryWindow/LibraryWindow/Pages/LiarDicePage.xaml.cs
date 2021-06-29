@@ -15,8 +15,6 @@ namespace LibraryWindow.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LiarDicePage : ContentPage
     {
-        MenuButtons _menuButton = new MenuButtons();
-
         public string Username
         {
             get { return User.Username; }
@@ -54,9 +52,6 @@ namespace LibraryWindow.Pages
 
         private async void Uitloggen_Pressed(object sender, EventArgs e)
         {
-
-            _menuButton.Uitloggen();
-
             bool logout = await User.LogoutAsync();
             if (logout)
             {
