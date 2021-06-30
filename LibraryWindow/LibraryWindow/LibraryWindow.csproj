@@ -77,6 +77,7 @@
     <None Remove="Images\Seven.png" />
     <None Remove="Images\wheel.png" />
     <None Remove="Images\WheelOfFortune\arrow.png" />
+    <None Remove="Images\WheelOfFortune\centerWheel.png" />
     <None Remove="Images\WheelOfFortune\wheel.png" />
     <None Remove="Images\WheelOfFortune\wheel2.png" />
     <None Remove="Images\WheelOfFortune\wheel3.png" />
@@ -150,6 +151,7 @@
     <EmbeddedResource Include="Images\Main\token.png" />
     <EmbeddedResource Include="Images\Main\wheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\arrow.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\centerWheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel2.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel3.png" />

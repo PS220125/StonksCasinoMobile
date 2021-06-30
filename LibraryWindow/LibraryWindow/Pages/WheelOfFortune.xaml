@@ -44,6 +44,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="1" Source="{Binding WheelImg, Mode=OneWay}" Margin="0,-15,0,25" x:Name="imgWheel" Rotation="7.5"/>
+                <Image Grid.Row="1" Source="{local:ImageResource LibraryWindow.Images.WheelOfFortune.centerWheel.png}" Margin="0,-15,0,25"/>
                 <Image Grid.Row="0" Source="{local:ImageResource LibraryWindow.Images.WheelOfFortune.arrow.png}" />
             </Grid>
 
