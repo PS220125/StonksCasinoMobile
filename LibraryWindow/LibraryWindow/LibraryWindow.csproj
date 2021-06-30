@@ -70,6 +70,7 @@
     <None Remove="Images\liarsdice.png" />
     <None Remove="Images\Main\Account.png" />
     <None Remove="Images\Main\backArrow.png" />
+    <None Remove="Images\Main\fingerprint.png" />
     <None Remove="Images\Main\streep.png" />
     <None Remove="Images\Main\token.png" />
     <None Remove="Images\Main\wheel.png" />
@@ -142,6 +143,7 @@
     <EmbeddedResource Include="Images\Main\backArrow.png" />
     <EmbeddedResource Include="Images\Main\background.png" />
     <EmbeddedResource Include="Images\Main\blackjacklogo.png" />
+    <EmbeddedResource Include="Images\Main\fingerprint.png" />
     <EmbeddedResource Include="Images\Main\liarsdice.png" />
     <EmbeddedResource Include="Images\Main\seven.png" />
     <EmbeddedResource Include="Images\Main\streep.png" />

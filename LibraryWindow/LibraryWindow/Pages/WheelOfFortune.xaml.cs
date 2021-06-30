@@ -27,7 +27,7 @@ namespace LibraryWindow.Pages
         {
             if (blnShouldStay || WinAmount > 0)
             {
-                if(blnShouldStay == true)
+                if (blnShouldStay == true)
                 {
                     App.Current.MainPage.DisplayAlert("Let op!", "Wacht tot dat het rad is uitgedraaid.", "OK");
                 }
@@ -58,20 +58,36 @@ namespace LibraryWindow.Pages
 
         private async void Account()
         {
-            bool result = await ApiWrapper.GetUserInfo();
-            OnPropertyChanged("Username");
-            OnPropertyChanged("Tokens");
-            if (!result)
+            try
             {
+                bool result = await ApiWrapper.GetUserInfo();
+                OnPropertyChanged("Username");
+                OnPropertyChanged("Tokens");
+                if (!result)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
 
         private async void Uitloggen_Pressed(object sender, EventArgs e)
         {
-            bool logout = await User.LogoutAsync();
-            if (logout)
+            try
             {
+                bool logout = await User.LogoutAsync();
+                if (logout)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -194,7 +210,15 @@ namespace LibraryWindow.Pages
             {
                 //Clock = DateTime.Now;
                 OnPropertyChanged("Tokens");
-                ApiWrapper.GetUserInfo();
+                try
+                {
+                    ApiWrapper.GetUserInfo();
+                }
+                catch
+                {
+                    DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                    Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
                 return true; // True = Repeat again, False = Stop the timer
             });
 
@@ -210,30 +234,37 @@ namespace LibraryWindow.Pages
             //if (_hourControle >= 1)
             //{
             //database.Tokens - 65;
-            if (Tokens >= 65)
+            try
             {
-                blnShouldStay = true;
-                await ApiWrapper.UpdateTokens(-65, _sender);
-                await ApiWrapper.GetUserInfo();
-                OnPropertyChanged("Tokens");
+                if (Tokens >= 65)
+                {
+                    blnShouldStay = true;
+                    await ApiWrapper.UpdateTokens(-65, _sender);
+                    await ApiWrapper.GetUserInfo();
+                    OnPropertyChanged("Tokens");
 
-                ButtonSwitch = "False";
-                MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
-                Cost += 65;
-                GameCount += 1;
+                    ButtonSwitch = "False";
+                    MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
+                    Cost += 65;
+                    GameCount += 1;
 
-                await imgWheel.RotateTo(MyStartPoint, 0);
-                await imgWheel.RotateTo(MyAngle, (uint)_mySpeed.Next(6000, 14000), Easing.CubicOut);
+                    await imgWheel.RotateTo(MyStartPoint, 0);
+                    await imgWheel.RotateTo(MyAngle, (uint)_mySpeed.Next(6000, 14000), Easing.CubicOut);
 
-                btnStop.IsEnabled = true;
-                Storyboard_Completed();
+                    btnStop.IsEnabled = true;
+                    Storyboard_Completed();
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Te weinig tokens", "U moet minimaal 65 tokens in bezit hebben om te kunnen draaien!", "OK");
+                    btnStop.IsEnabled = true;
+                }
             }
-            else
+            catch
             {
-                await App.Current.MainPage.DisplayAlert("Te weinig tokens", "U moet minimaal 65 tokens in bezit hebben om te kunnen draaien!", "OK");
-                btnStop.IsEnabled = true;
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
-
         }
 
 
@@ -347,8 +378,15 @@ namespace LibraryWindow.Pages
 
         private async void Btn_Stop_Pressed(object sender, EventArgs e)
         {
-            await ApiWrapper.UpdateTokens(WinAmount, _sender);
-            await ApiWrapper.GetUserInfo();
+            try
+            {
+                await ApiWrapper.UpdateTokens(WinAmount, _sender);
+                await ApiWrapper.GetUserInfo();
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+            }
 
             //WinAmount += database.Tokens;
             Bankrupt();
@@ -398,20 +436,28 @@ namespace LibraryWindow.Pages
 
         private async void BackButton_Pressed(object sender, EventArgs e)
         {
-            if (blnShouldStay || WinAmount > 0)
+            try
             {
-                if (blnShouldStay == true)
+                if (blnShouldStay || WinAmount > 0)
                 {
-                    await App.Current.MainPage.DisplayAlert("Let op!", "Wacht tot dat het rad is uitgedraaid.", "OK");
+                    if (blnShouldStay == true)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Let op!", "Wacht tot dat het rad is uitgedraaid.", "OK");
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Let op!", "Vergeet niet om op stop te drukken om je pot veilig te stellen op je account.", "OK");
+                    }
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Let op!", "Vergeet niet om op stop te drukken om je pot veilig te stellen op je account.", "OK");
+                    await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
                 }
             }
-            else
+            catch
             {
-                await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
     }

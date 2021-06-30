@@ -83,43 +83,50 @@ namespace LibraryWindow.Pages
 
         private async void login()
         {
-            LoginCredentials credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = false };
-            string result = await ApiWrapper.Login(credentials);
-            User.Logoutclick = false;
+            try
+            {
+                LoginCredentials credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = false };
+                string result = await ApiWrapper.Login(credentials);
+                User.Logoutclick = false;
 
-            if (result == "succes")
-            {
-                if (Remember)
+                if (result == "succes")
                 {
-                    RememberMe();
-                }
-                await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
-            }
-            else if (result == "active")
-            {
-                bool action = false;
-                if (!fingerIsTrue)
-                {
-                    action = await App.Current.MainPage.DisplayAlert($"Opgelet!", "Er is al iemand anders ingelogd op dit account! Als u toch wilt inloggen wordt de ander van uw account afgezet. Let op! Dit kan nadelige gevolgen hebben voor uw account als de persoon die ingelogd is momenteel bezig is met een spel heb je het risico om je inzit kwijt te raken. Wilt u toch inloggen?", "Yes", "No");
-                }
-                if (action || fingerIsTrue)
-                {
-                    credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = true };
-                    result = await ApiWrapper.Login(credentials);
                     if (Remember)
                     {
                         RememberMe();
                     }
                     await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
                 }
+                else if (result == "active")
+                {
+                    bool action = false;
+                    if (!fingerIsTrue)
+                    {
+                        action = await App.Current.MainPage.DisplayAlert($"Opgelet!", "Er is al iemand anders ingelogd op dit account! Als u toch wilt inloggen wordt de ander van uw account afgezet. Let op! Dit kan nadelige gevolgen hebben voor uw account als de persoon die ingelogd is momenteel bezig is met een spel heb je het risico om je inzit kwijt te raken. Wilt u toch inloggen?", "Yes", "No");
+                    }
+                    if (action || fingerIsTrue)
+                    {
+                        credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = true };
+                        result = await ApiWrapper.Login(credentials);
+                        if (Remember)
+                        {
+                            RememberMe();
+                        }
+                        await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Alert", "Gebruikersnaam of wachtwoord is incorrect.", "OK");
+                }
             }
-            else
+            catch
             {
-                await DisplayAlert("Alert", "Gebruikersnaam of wachtwoord is incorrect.", "OK");
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
             }
         }
 
-        private async void RememberMe()
+        private void RememberMe()
         {
             Preferences.Set("user_name", MyEmail);
             Preferences.Set("pass_word", MyPassword);
@@ -184,6 +191,11 @@ namespace LibraryWindow.Pages
 
                 login();
             }
+        }
+
+        private void FingerprintButton_Pressed(object sender, EventArgs e)
+        {
+            fingerprint();
         }
     }
 }

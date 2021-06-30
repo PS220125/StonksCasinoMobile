@@ -58,14 +58,30 @@ namespace LibraryWindow
 
         public MainPage()
         {
-            BindingContext = this;
-            InitializeComponent();
-            Account();
+            try
+            {
+                BindingContext = this;
+                InitializeComponent();
+                Account();
+            }
+            catch
+            {
+                DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
 
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
-                OnPropertyChanged("Tokens");
-                ApiWrapper.GetUserInfo();
+                try
+                {
+                    OnPropertyChanged("Tokens");
+                    ApiWrapper.GetUserInfo();
+                }
+                catch
+                {
+                    DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                    Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
                 return true; // True = Repeat again, False = Stop the timer
             });
         }
@@ -80,11 +96,19 @@ namespace LibraryWindow
 
         private async void Account()
         {
-            bool result = await ApiWrapper.GetUserInfo();
-            OnPropertyChanged("Username");
-            OnPropertyChanged("Tokens");
-            if (!result)
+            try
             {
+                bool result = await ApiWrapper.GetUserInfo();
+                OnPropertyChanged("Username");
+                OnPropertyChanged("Tokens");
+                if (!result)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -95,11 +119,21 @@ namespace LibraryWindow
             Preferences.Remove("pass_word");
             Preferences.Remove("remember");
 
-            bool logout = await User.LogoutAsync();
-            if (logout)
+            try
             {
+                bool logout = await User.LogoutAsync();
+                if (logout)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
+
+
         }
 
         [Obsolete]

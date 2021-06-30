@@ -42,27 +42,51 @@ namespace LibraryWindow.Pages
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
                 OnPropertyChanged("Tokens");
-                ApiWrapper.GetUserInfo();
-                return true; // True = Repeat again, False = Stop the timer
+                try
+                {
+                    ApiWrapper.GetUserInfo();
+                }
+                catch
+                {
+                    DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                    Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+                return true;
             });
         }
 
         private async void Account()
         {
-            bool result = await ApiWrapper.GetUserInfo();
-            OnPropertyChanged("Username");
-            OnPropertyChanged("Tokens");
-            if (!result)
+            try
             {
+                bool result = await ApiWrapper.GetUserInfo();
+                OnPropertyChanged("Username");
+                OnPropertyChanged("Tokens");
+                if (!result)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
 
         private async void Uitloggen_Pressed(object sender, EventArgs e)
         {
-            bool logout = await User.LogoutAsync();
-            if (logout)
+            try
             {
+                bool logout = await User.LogoutAsync();
+                if (logout)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
