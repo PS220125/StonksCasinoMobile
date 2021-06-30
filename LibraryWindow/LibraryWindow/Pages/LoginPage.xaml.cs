@@ -122,7 +122,7 @@ namespace LibraryWindow.Pages
             }
             catch
             {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
             }
         }
 
@@ -177,7 +177,7 @@ namespace LibraryWindow.Pages
             var Isavaliable = await CrossFingerprint.Current.IsAvailableAsync();
             if (!Isavaliable)
             {
-                await DisplayAlert("Helaas", "Geen overeenkomst", "Ok");
+                await DisplayAlert("Helaas", "Er is geen vingerafdruk geregistreerd op dit apparaat. Ga naar de instellingen van je apparaat om een vingerafdruk toe te voegen.", "Ok");
                 return;
             }
             var AuthFinger = await CrossFingerprint.Current.AuthenticateAsync

@@ -49,7 +49,7 @@ namespace LibraryWindow.Pages
             }
             catch
             {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -66,7 +66,7 @@ namespace LibraryWindow.Pages
             }
             catch
             {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -171,7 +171,7 @@ namespace LibraryWindow.Pages
                 }
                 catch
                 {
-                    DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                    DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                     Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
                 }
                 return true;

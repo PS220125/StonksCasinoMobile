@@ -70,7 +70,7 @@ namespace LibraryWindow.Pages
             }
             catch
             {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -87,7 +87,7 @@ namespace LibraryWindow.Pages
             }
             catch
             {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -194,8 +194,8 @@ namespace LibraryWindow.Pages
             set { _winGrid = value; OnPropertyChanged(); }
         }
 
-
-
+        bool draaiPressed = false;
+        bool stopPressed = false;
 
 
 
@@ -216,7 +216,7 @@ namespace LibraryWindow.Pages
                 }
                 catch
                 {
-                    DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                    DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                     Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
                 }
                 return true; // True = Repeat again, False = Stop the timer
@@ -229,41 +229,42 @@ namespace LibraryWindow.Pages
 
         private async void Btn_Draai_Pressed(object sender, EventArgs e)
         {
-            btnStop.IsEnabled = false;
-
-            //if (_hourControle >= 1)
-            //{
-            //database.Tokens - 65;
-            try
+            if (!draaiPressed)
             {
-                if (Tokens >= 65)
+                draaiPressed = true;
+                btnStop.IsEnabled = false;
+                try
                 {
-                    blnShouldStay = true;
-                    await ApiWrapper.UpdateTokens(-65, _sender);
-                    await ApiWrapper.GetUserInfo();
-                    OnPropertyChanged("Tokens");
+                    if (Tokens >= 65)
+                    {
+                        blnShouldStay = true;
+                        await ApiWrapper.UpdateTokens(-65, _sender);
+                        await ApiWrapper.GetUserInfo();
+                        OnPropertyChanged("Tokens");
 
-                    ButtonSwitch = "False";
-                    MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
-                    Cost += 65;
-                    GameCount += 1;
+                        ButtonSwitch = "False";
+                        MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
+                        Cost += 65;
+                        GameCount += 1;
 
-                    await imgWheel.RotateTo(MyStartPoint, 0);
-                    await imgWheel.RotateTo(MyAngle, (uint)_mySpeed.Next(6000, 14000), Easing.CubicOut);
+                        await imgWheel.RotateTo(MyStartPoint, 0);
+                        await imgWheel.RotateTo(MyAngle, (uint)_mySpeed.Next(6000, 14000), Easing.CubicOut);
 
-                    btnStop.IsEnabled = true;
-                    Storyboard_Completed();
+                        btnStop.IsEnabled = true;
+                        Storyboard_Completed();
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Te weinig tokens", "U moet minimaal 65 tokens in bezit hebben om te kunnen draaien!", "OK");
+                        btnStop.IsEnabled = true;
+                    }
+                    draaiPressed = false;
                 }
-                else
+                catch
                 {
-                    await App.Current.MainPage.DisplayAlert("Te weinig tokens", "U moet minimaal 65 tokens in bezit hebben om te kunnen draaien!", "OK");
-                    btnStop.IsEnabled = true;
+                    await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
                 }
-            }
-            catch
-            {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
-                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
 
@@ -378,19 +379,24 @@ namespace LibraryWindow.Pages
 
         private async void Btn_Stop_Pressed(object sender, EventArgs e)
         {
-            try
+            if (!stopPressed)
             {
-                await ApiWrapper.UpdateTokens(WinAmount, _sender);
-                await ApiWrapper.GetUserInfo();
-            }
-            catch
-            {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
-            }
+                stopPressed = true;
+                try
+                {
+                    await ApiWrapper.UpdateTokens(WinAmount, _sender);
+                    await ApiWrapper.GetUserInfo();
+                }
+                catch
+                {
+                    await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                }
 
-            //WinAmount += database.Tokens;
-            Bankrupt();
-            Cost = 0;
+                //WinAmount += database.Tokens;
+                Bankrupt();
+                Cost = 0;
+                stopPressed = false;
+            }
         }
 
         private async void Bankrupt()
@@ -423,7 +429,7 @@ namespace LibraryWindow.Pages
 
         private void Button_Pressed(object sender, EventArgs e)
         {
-            if (gridRules.IsVisible)
+            if (gridRules.IsVisible == true)
             {
                 gridRules.IsVisible = false;
             }
@@ -442,7 +448,7 @@ namespace LibraryWindow.Pages
                 {
                     if (blnShouldStay == true)
                     {
-                        await App.Current.MainPage.DisplayAlert("Let op!", "Wacht tot dat het rad is uitgedraaid.", "OK");
+                        await App.Current.MainPage.DisplayAlert("Let op!", "Wacht totdat het rad is uitgedraaid.", "OK");
                     }
                     else
                     {
@@ -456,7 +462,7 @@ namespace LibraryWindow.Pages
             }
             catch
             {
-                await DisplayAlert("Check internet", "U bent mogelijk connectie met internet verloren", "OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }

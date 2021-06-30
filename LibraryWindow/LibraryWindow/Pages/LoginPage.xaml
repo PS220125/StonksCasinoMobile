@@ -11,33 +11,39 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            
-            <Image Grid.RowSpan="3" Grid.ColumnSpan="3" Source="{local:ImageResource LibraryWindow.Images.Main.background.png}" Aspect="AspectFill"/>
-            <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Frame Padding="20" BackgroundColor="#88000000" CornerRadius="25">
-                    <StackLayout>
-                        <Entry PlaceholderColor="#c2c2c2" TextColor="White" Placeholder="E-mail" Text="{Binding MyEmail, Mode=OneWayToSource}"/>
-                        <Entry PlaceholderColor="#c2c2c2" TextColor="White" Placeholder="Wachtwoord" Text="{Binding MyPassword, Mode=OneWayToSource}" IsPassword="True"/>
-                        <StackLayout Orientation="Horizontal">
+            <Grid>
+                <Image Grid.RowSpan="5" Source="{local:ImageResource LibraryWindow.Images.Main.background.png}" Aspect="AspectFill"/>
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="275"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="425"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#88000000" Padding="15" CornerRadius="20">
+                    <Grid>
+                        <Entry Grid.Row="0" PlaceholderColor="#c2c2c2" TextColor="White" Placeholder="E-mail" Text="{Binding MyEmail, Mode=OneWayToSource}"/>
+                        <Entry Grid.Row="1" PlaceholderColor="#c2c2c2" TextColor="White" Placeholder="Wachtwoord" Text="{Binding MyPassword, Mode=OneWayToSource}" IsPassword="True"/>
+
+                        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" Spacing="0">
                             <Button Text="Account registreren" TextTransform="None" TextColor="White" BackgroundColor="Transparent" Pressed="Register_Pressed"/>
-                            <Button Text="|" TextColor="White" BackgroundColor="Transparent" Margin="-10,0,0,0"/>
-                            <Button Text="Wachtwoord vergeten?" TextTransform="None" TextColor="White" BackgroundColor="Transparent" Pressed="Passreset_Pressed" Margin="-20,0,50,0"/>
+                            <Label Text="|" VerticalOptions="Center" TextColor="White" BackgroundColor="Transparent"/>
+                            <Button Text="Wachtwoord vergeten?" TextTransform="None" TextColor="White" BackgroundColor="Transparent" Pressed="Passreset_Pressed"/>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
+
+                        <StackLayout Grid.Row="3" Orientation="Horizontal">
                             <CheckBox IsChecked="{Binding Remember, Mode=OneWayToSource}"></CheckBox>
                             <Label Text="Onthoud mij" VerticalOptions="Center" TextColor="White"/>
                         </StackLayout>
-                        <Grid>
+
+                        <Grid Grid.Row="4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition Width="2*"/>
@@ -45,9 +51,9 @@
                             <ImageButton Pressed="FingerprintButton_Pressed" Grid.Column="1" BackgroundColor="Transparent" Source="{local:ImageResource LibraryWindow.Images.Main.fingerprint.png}" />
                             <Button Grid.Column="0" Pressed="Button_Pressed" CornerRadius="50" BackgroundColor="DarkGreen" Text="login"/>
                         </Grid>
-                    </StackLayout>
+                    </Grid>
                 </Frame>
-            </StackLayout>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
