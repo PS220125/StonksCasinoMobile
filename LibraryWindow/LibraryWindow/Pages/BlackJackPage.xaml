@@ -63,8 +63,8 @@
                     </StackLayout>
 
                     <Grid Grid.Row="1" Grid.Column="1" IsVisible="{Binding Game.SplitGrid}">
-                        <Label Text="{Binding Game.Players[0].ScoreL, Mode=OneWay}" x:Name="Leftscore" Margin="90,80,0,0" WidthRequest="50" HeightRequest="50" FontSize="25" VerticalTextAlignment="Center"></Label>
-                        <Label Text="{Binding Game.Players[0].ScoreR, Mode=OneWay}" x:Name="Rightscore" Margin="260,80,0,0" WidthRequest="50" HeightRequest="50" FontSize="25" VerticalTextAlignment="Center"></Label>
+                        <Label Text="{Binding Game.Players[0].ScoreL, Mode=OneWay}" x:Name="Leftscore" Margin="90,75,0,0" WidthRequest="50" HeightRequest="50" FontSize="25" VerticalTextAlignment="Center"></Label>
+                        <Label Text="{Binding Game.Players[0].ScoreR, Mode=OneWay}" x:Name="Rightscore" Margin="260,75,0,0" WidthRequest="50" HeightRequest="50" FontSize="25" VerticalTextAlignment="Center"></Label>
                     </Grid>
 
                     <Grid Grid.Row="2" Grid.Column="1" IsVisible="{Binding Game.SplitGrid}">
