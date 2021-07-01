@@ -44,7 +44,6 @@ namespace LibraryWindow.classes.Main
             set { _selectedCardskin = value; }
         }
 
-
         public static async Task<bool> LogoutAsync()
         {
             //LibraryWindow.Properties.Settings.Default.Username = "";
