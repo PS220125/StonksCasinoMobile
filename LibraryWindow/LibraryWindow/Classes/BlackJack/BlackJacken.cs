@@ -1,8 +1,10 @@
 ﻿using LibraryWindow.classes.Api;
 using LibraryWindow.Classes.Main;
+using LibraryWindow.Pages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace LibraryWindow.Classes.BlackJack
 {
@@ -189,16 +191,26 @@ namespace LibraryWindow.Classes.BlackJack
 
         public async void Dubbelen()
         {
-            await ApiWrapper.UpdateTokens(-MyAantal, _sender);
-            MyAantal = MyAantal * 2;
-            Dubbel = false;
-            Hit = false;
-            Players[0].AddCard(deck.DrawCard());
-            //App.Current.MainPage.DisplayAlert($"Dubbel", "Het aantal is verdubbeld en u pakt een kaart!", "OK");
+            try
+            {
+                await ApiWrapper.UpdateTokens(-MyAantal, _sender);
+                MyAantal = MyAantal * 2;
+                Dubbel = false;
+                Hit = false;
+                Players[0].AddCard(deck.DrawCard());
+                //App.Current.MainPage.DisplayAlert($"Dubbel", "Het aantal is verdubbeld en u pakt een kaart!", "OK");
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
         }
 
         public async void Splitte()
         {
+            try
+            {
             await ApiWrapper.UpdateTokens(-MyAantal, _sender);
             Splitten = false;
             MyAantal = MyAantal * 2;
@@ -206,7 +218,13 @@ namespace LibraryWindow.Classes.BlackJack
             Splitted = true;
             Players[0].Changescore2();
             Players[0].Update();
-            //App.Current.MainPage.DisplayAlert($"Splitten", "Er wordt gesplit", "OK");
+                //App.Current.MainPage.DisplayAlert($"Splitten", "Er wordt gesplit", "OK");
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
         }
 
         public void Splitfunction2()
@@ -268,23 +286,56 @@ namespace LibraryWindow.Classes.BlackJack
 
         public async void Gamewin()
         {
+            try
+            {
             await ApiWrapper.UpdateTokens(MyAantal * 2, _sender);
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
         }
 
         public async void Gamedraw()
         {
+            try
+            {
             await ApiWrapper.UpdateTokens(MyAantal, _sender);
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
         }
 
         public async void Gamewin2()
         {
+            try
+            {
             await ApiWrapper.UpdateTokens(MyAantal * 2, _sender);
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
         }
 
         public async void Gamedraw2()
         {
-            await ApiWrapper.UpdateTokens(MyAantal, _sender);
-        }
+            try
+            {
+                await ApiWrapper.UpdateTokens(MyAantal, _sender);
+            }
+            catch
+            {
+                await App.Current.MainPage.DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await App.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
+
+}
 
         public void Gameclear()
         {
