@@ -22,13 +22,19 @@ namespace LibraryWindow.Pages
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-
         bool blnShouldStay = false;
         protected override bool OnBackButtonPressed()
         {
-            if (blnShouldStay)
+            if (blnShouldStay || WinAmount > 0)
             {
-                // Yes, we want to stay.
+                if (blnShouldStay == true)
+                {
+                    App.Current.MainPage.DisplayAlert("Let op!", "Wacht tot dat het rad is uitgedraaid.", "OK");
+                }
+                else
+                {
+                    App.Current.MainPage.DisplayAlert("Let op!", "Vergeet niet om op stop te drukken om je pot veilig te stellen op je account.", "OK");
+                }
                 return true;
             }
             else
@@ -39,8 +45,6 @@ namespace LibraryWindow.Pages
         }
 
         private const string _sender = "WheelOfFortune";
-
-        MenuButtons _menuButton = new MenuButtons();
 
         public string Username
         {
@@ -54,23 +58,36 @@ namespace LibraryWindow.Pages
 
         private async void Account()
         {
-            bool result = await ApiWrapper.GetUserInfo();
-            OnPropertyChanged("Username");
-            OnPropertyChanged("Tokens");
-            if (!result)
+            try
             {
+                bool result = await ApiWrapper.GetUserInfo();
+                OnPropertyChanged("Username");
+                OnPropertyChanged("Tokens");
+                if (!result)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
 
         private async void Uitloggen_Pressed(object sender, EventArgs e)
         {
-
-            _menuButton.Uitloggen();
-
-            bool logout = await User.LogoutAsync();
-            if (logout)
+            try
             {
+                bool logout = await User.LogoutAsync();
+                if (logout)
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                 await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
@@ -177,8 +194,8 @@ namespace LibraryWindow.Pages
             set { _winGrid = value; OnPropertyChanged(); }
         }
 
-
-
+        bool draaiPressed = false;
+        bool stopPressed = false;
 
 
 
@@ -193,7 +210,15 @@ namespace LibraryWindow.Pages
             {
                 //Clock = DateTime.Now;
                 OnPropertyChanged("Tokens");
-                ApiWrapper.GetUserInfo();
+                try
+                {
+                    ApiWrapper.GetUserInfo();
+                }
+                catch
+                {
+                    DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                    Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
                 return true; // True = Repeat again, False = Stop the timer
             });
 
@@ -204,56 +229,43 @@ namespace LibraryWindow.Pages
 
         private async void Btn_Draai_Pressed(object sender, EventArgs e)
         {
-            btnStop.IsEnabled = false;
+            if (!draaiPressed)
+            {
+                draaiPressed = true;
+                btnStop.IsEnabled = false;
+                try
+                {
+                    if (Tokens >= 65)
+                    {
+                        blnShouldStay = true;
+                        await ApiWrapper.UpdateTokens(-65, _sender);
+                        await ApiWrapper.GetUserInfo();
+                        OnPropertyChanged("Tokens");
 
-            //if (_hourControle >= 1)
-            //{
-            //database.Tokens - 65;
-            await ApiWrapper.UpdateTokens(-65, _sender);
-            await ApiWrapper.GetUserInfo();
-            OnPropertyChanged("Tokens");
+                        ButtonSwitch = "False";
+                        MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
+                        Cost += 65;
+                        GameCount += 1;
 
-            ButtonSwitch = "False";
-            MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
-            Cost += 65;
-            GameCount += 1;
+                        await imgWheel.RotateTo(MyStartPoint, 0);
+                        await imgWheel.RotateTo(MyAngle, (uint)_mySpeed.Next(6000, 14000), Easing.CubicOut);
 
-            // begin always bankrupt
-            //double a = (MyAngle - 7.5) % 360 / 15;
-            //if (GameCount == 1 && uitkomsten1[(int)a] != 0)
-            //{
-            //    while (uitkomsten1[(int)a] != 400)
-            //    {
-            //        MyAngle = _rnd.Next(120, 145) * 15 + 7.5;
-            //        a = (MyAngle - 7.5) % 360 / 15;
-            //    }
-            //}
-            //else if (GameCount == 2)
-            //{
-            //}
-            //else if (GameCount == 3)
-            //{
-            //}
-            //else if (GameCount == 4)
-            //{
-            //}
-            //else if (GameCount >= 5)
-            //{
-            //}
-            // end 
-
-
-
-            await imgWheel.RotateTo(MyStartPoint, 0);
-            await imgWheel.RotateTo(MyAngle, (uint)_mySpeed.Next(7000, 13000), Easing.CubicOut);
-
-            btnStop.IsEnabled = true;
-            Storyboard_Completed();
-            //}
-            //else
-            //{
-            //    await DisplayAlert("Warning", "Je moet een uur wachten", "OK");
-            //}
+                        btnStop.IsEnabled = true;
+                        Storyboard_Completed();
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Te weinig tokens", "U moet minimaal 65 tokens in bezit hebben om te kunnen draaien!", "OK");
+                        btnStop.IsEnabled = true;
+                    }
+                    draaiPressed = false;
+                }
+                catch
+                {
+                    await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                    await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+                }
+            }
         }
 
 
@@ -362,16 +374,29 @@ namespace LibraryWindow.Pages
             lbWin.Opacity = 1;
             WinGrid = "false";
             ButtonSwitch = "True";
+            blnShouldStay = false;
         }
 
         private async void Btn_Stop_Pressed(object sender, EventArgs e)
         {
-            await ApiWrapper.UpdateTokens(WinAmount, _sender);
-            await ApiWrapper.GetUserInfo();
+            if (!stopPressed)
+            {
+                stopPressed = true;
+                try
+                {
+                    await ApiWrapper.UpdateTokens(WinAmount, _sender);
+                    await ApiWrapper.GetUserInfo();
+                }
+                catch
+                {
+                    await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                }
 
-            //WinAmount += database.Tokens;
-            Bankrupt();
-            Cost = 0;
+                //WinAmount += database.Tokens;
+                Bankrupt();
+                Cost = 0;
+                stopPressed = false;
+            }
         }
 
         private async void Bankrupt()
@@ -404,7 +429,7 @@ namespace LibraryWindow.Pages
 
         private void Button_Pressed(object sender, EventArgs e)
         {
-            if (gridRules.IsVisible)
+            if (gridRules.IsVisible == true)
             {
                 gridRules.IsVisible = false;
             }
@@ -413,6 +438,33 @@ namespace LibraryWindow.Pages
                 gridRules.IsVisible = true;
             }
 
+        }
+
+        private async void BackButton_Pressed(object sender, EventArgs e)
+        {
+            try
+            {
+                if (blnShouldStay || WinAmount > 0)
+                {
+                    if (blnShouldStay == true)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Let op!", "Wacht totdat het rad is uitgedraaid.", "OK");
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Let op!", "Vergeet niet om op stop te drukken om je pot veilig te stellen op je account.", "OK");
+                    }
+                }
+                else
+                {
+                    await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+                }
+            }
+            catch
+            {
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
         }
     }
 }

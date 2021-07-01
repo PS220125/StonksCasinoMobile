@@ -2,10 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LibraryWindow;assembly=LibraryWindow"
+             NavigationPage.HasBackButton="False"
              x:Class="LibraryWindow.Pages.WheelOfFortune">
     <NavigationPage.TitleView>
         <Grid>
             <StackLayout HorizontalOptions="Start" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                <ImageButton BackgroundColor="Transparent" Pressed="BackButton_Pressed" HeightRequest="30" WidthRequest="40" VerticalOptions="Center" Source="{local:ImageResource LibraryWindow.Images.Main.backArrow.png}"/>
                 <Button Text="Winkel" Pressed="Store_Pressed"/>
                 <Button Text="Geld storten" Pressed="Deposit_Pressed"/>
             </StackLayout>
@@ -42,6 +44,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="1" Source="{Binding WheelImg, Mode=OneWay}" Margin="0,-15,0,25" x:Name="imgWheel" Rotation="7.5"/>
+                <Image Grid.Row="1" Source="{local:ImageResource LibraryWindow.Images.WheelOfFortune.centerWheel.png}" Margin="0,-15,0,25"/>
                 <Image Grid.Row="0" Source="{local:ImageResource LibraryWindow.Images.WheelOfFortune.arrow.png}" />
             </Grid>
 
@@ -65,15 +68,15 @@
             </StackLayout>
         </Grid>
 
-        <Grid BackgroundColor="Red" Margin="50" x:Name="gridRules" IsVisible="false">
-            <Frame BackgroundColor="DarkGreen" Margin="5" CornerRadius="10">
-                <StackLayout>
-                    <Label TextColor="White" Text="Ronde 1: Het getal wat je draaid komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 2: Het getal wat je draaid +10% komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 3: Het getal wat je draaid +20% komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 4: Het getal wat je draaid +30% komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 5: Het getal wat je draaid komt in de pot."/>
-                    <Label TextColor="White" Text="Als je op bankrupt komt word de pot terug gezet naar 0. Als je op de stop knop drukt word het spel terug gezet naar ronde 1, de pot waarde word op je account bijgeschreven."/>
+        <Grid Margin="50,0" x:Name="gridRules" IsVisible="false">
+            <Frame BackgroundColor="Black" WidthRequest="400" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Center">
+                <StackLayout Background="DarkGreen" Spacing="2" HorizontalOptions="Center" VerticalOptions="Center" Padding="10">
+                    <Label TextColor="White" Text="Ronde 1: Het getal wat je draait komt in de pot."/>
+                    <Label TextColor="White" Text="Ronde 2: Het getal wat je draait +10% komt in de pot."/>
+                    <Label TextColor="White" Text="Ronde 3: Het getal wat je draait +20% komt in de pot."/>
+                    <Label TextColor="White" Text="Ronde 4: Het getal wat je draait +30% komt in de pot."/>
+                    <Label TextColor="White" Text="Ronde 5: Het getal wat je draait komt in de pot."/>
+                    <Label TextColor="White" Text="Als je op bankrupt komt wordt de pot terug gezet naar 0. Als je op de stop knop drukt wordt het spel terug gezet naar ronde 1, de pot waarde wordt op je account bijgeschreven."/>
                     <Label TextColor="White" Text="Elke keer als je op de draai knop klikt kost het je 65 tokens."/>
                 </StackLayout>
             </Frame>

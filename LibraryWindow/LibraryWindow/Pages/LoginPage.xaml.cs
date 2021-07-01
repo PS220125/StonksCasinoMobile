@@ -1,6 +1,8 @@
 ﻿using LibraryWindow.classes.Api;
 using LibraryWindow.classes.Api.Models;
 using LibraryWindow.classes.Main;
+using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -62,68 +64,73 @@ namespace LibraryWindow.Pages
             set { _remember = value; OnPropertyChanged(); }
         }
 
+        private bool fingerIsTrue = false;
 
         public LoginPage()
         {
             InitializeComponent();
             BindingContext = this;
+            if (Preferences.Get("remember", "default_value") == "remembered")
+            {
+                fingerprint();
+            }
         }
 
-        private async void Button_Pressed(object sender, EventArgs e)
+        private void Button_Pressed(object sender, EventArgs e)
         {
-            LoginCredentials credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = false };
-            string result = await ApiWrapper.Login(credentials);
-            User.Logoutclick = false;
+            login();
+        }
 
-            if (result == "succes")
+        private async void login()
+        {
+            try
             {
-                if (Remember)
+                LoginCredentials credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = false };
+                string result = await ApiWrapper.Login(credentials);
+                User.Logoutclick = false;
+
+                if (result == "succes")
                 {
-                    RememberMe();
-                }
-                Navigation.PushModalAsync(new NavigationPage(new MainPage()));
-
-
-                //LibraryWindow libraryWindow = new LibraryWindow();
-                //this.Close();
-                //libraryWindow.Show();
-            }
-            else if (result == "active")
-            {
-                bool action = await App.Current.MainPage.DisplayAlert($"Opgelet!", "Er is al iemand anders ingelogd op dit account! Als u toch wilt inloggen wordt de ander van uw account afgezet. Let op! Dit kan nadelige gevolgen hebben voor uw account als de persoon die ingelogd is momenteel bezig is met een spel heb je het risico om je inzit kwijt te raken. Wilt u toch inloggen?", "Yes", "No");
-
-                //MessageBoxResult mes = MessageBox.Show("Er is al iemand anders ingelogd op dit account! Als u toch wilt inloggen wordt de ander van uw account afgezet. Let op! Dit kan nadelige gevolgen hebben voor uw account als de persoon die ingelogd is momenteel bezig is met een spel heb je het risico om je inzit kwijt te raken. Wilt u toch inloggen?", "Inloggen", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                //if (mes == MessageBoxResult.Yes)
-                if (action)
-                {
-                    credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = true };
-                    result = await ApiWrapper.Login(credentials);
                     if (Remember)
                     {
                         RememberMe();
                     }
-                    Navigation.PushModalAsync(new NavigationPage(new MainPage()));
-
-
-                    //LibraryWindow libraryWindow = new LibraryWindow();
-                    //this.Close();
-                    //libraryWindow.ShowDialog();
+                    await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+                }
+                else if (result == "active")
+                {
+                    bool action = false;
+                    if (!fingerIsTrue)
+                    {
+                        action = await App.Current.MainPage.DisplayAlert($"Opgelet!", "Er is al iemand anders ingelogd op dit account! Als u toch wilt inloggen wordt de ander van uw account afgezet. Let op! Dit kan nadelige gevolgen hebben voor uw account als de persoon die ingelogd is momenteel bezig is met een spel heb je het risico om je inzit kwijt te raken. Wilt u toch inloggen?", "Yes", "No");
+                    }
+                    if (action || fingerIsTrue)
+                    {
+                        credentials = new LoginCredentials() { Email = MyEmail, Password = MyPassword, Overwride = true };
+                        result = await ApiWrapper.Login(credentials);
+                        if (Remember)
+                        {
+                            RememberMe();
+                        }
+                        await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Alert", "Gebruikersnaam of wachtwoord is incorrect.", "OK");
                 }
             }
-            else
+            catch
             {
-                await DisplayAlert("Alert","Gebruikersnaam of wachtwoord is incorrect.","OK");
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
             }
-
-            //Navigation.PushModalAsync(new NavigationPage(new MainPage()));
         }
 
-        private async void RememberMe()
+        private void RememberMe()
         {
-            //Properties.Settings.Default.Username = MyEmail;
-            //Properties.Settings.Default.Password = MyPassword;
-            //Properties.Settings.Default.Save();
-            await DisplayAlert("Alert", "Remember me", "OK");
+            Preferences.Set("user_name", MyEmail);
+            Preferences.Set("pass_word", MyPassword);
+            Preferences.Set("remember", "remembered");
 
         }
 
@@ -137,6 +144,58 @@ namespace LibraryWindow.Pages
         private void Register_Pressed(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("https://stonkscasino.nl/public/register"));
+        }
+
+
+        private void LoginRemember()
+        {
+            //try
+            //{
+            //    var checkPreferences = Preferences.Get("remember", "default_value");
+            //    var checkPreferences1 = Preferences.Get("user_name", "default_value");
+            //    var checkPreferences2 = Preferences.Get("pass_word", "default_value");
+
+            //    if (checkPreferences == "true")
+            //    {
+            //        //LoginCredentials credentials = new LoginCredentials() { Email = Preferences.Get("user_name", "default_value"), Password = Preferences.Get("pass_word", "default_value"), Overwride = false };
+            //        //string result = await ApiWrapper.Login(credentials);
+
+            //        //if (result == "active")
+            //        //{
+            //        Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+            //        //}
+            //    }
+            //}
+            //catch
+            //{
+
+            //}
+        }
+
+        private async void fingerprint()
+        {
+            var Isavaliable = await CrossFingerprint.Current.IsAvailableAsync();
+            if (!Isavaliable)
+            {
+                await DisplayAlert("Helaas", "Er is geen vingerafdruk geregistreerd op dit apparaat. Ga naar de instellingen van je apparaat om een vingerafdruk toe te voegen.", "Ok");
+                return;
+            }
+            var AuthFinger = await CrossFingerprint.Current.AuthenticateAsync
+                (new AuthenticationRequestConfiguration("Biometrie vergrendeling", "Gebruik vingerafdruk of gezichtsherkenning om in te loggen."));
+            if (AuthFinger.Authenticated)
+            {
+                fingerIsTrue = true;
+
+                MyEmail = Preferences.Get("user_name", "default_value");
+                MyPassword = Preferences.Get("pass_word", "default_value");
+
+                login();
+            }
+        }
+
+        private void FingerprintButton_Pressed(object sender, EventArgs e)
+        {
+            fingerprint();
         }
     }
 }

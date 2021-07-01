@@ -69,12 +69,15 @@
     <None Remove="Images\Cards\TwoSpades.png" />
     <None Remove="Images\liarsdice.png" />
     <None Remove="Images\Main\Account.png" />
+    <None Remove="Images\Main\backArrow.png" />
+    <None Remove="Images\Main\fingerprint.png" />
     <None Remove="Images\Main\streep.png" />
     <None Remove="Images\Main\token.png" />
     <None Remove="Images\Main\wheel.png" />
     <None Remove="Images\Seven.png" />
     <None Remove="Images\wheel.png" />
     <None Remove="Images\WheelOfFortune\arrow.png" />
+    <None Remove="Images\WheelOfFortune\centerWheel.png" />
     <None Remove="Images\WheelOfFortune\wheel.png" />
     <None Remove="Images\WheelOfFortune\wheel2.png" />
     <None Remove="Images\WheelOfFortune\wheel3.png" />
@@ -138,14 +141,17 @@
     <EmbeddedResource Include="Images\Cards\TwoHearts.png" />
     <EmbeddedResource Include="Images\Cards\TwoSpades.png" />
     <EmbeddedResource Include="Images\Main\account.png" />
+    <EmbeddedResource Include="Images\Main\backArrow.png" />
     <EmbeddedResource Include="Images\Main\background.png" />
     <EmbeddedResource Include="Images\Main\blackjacklogo.png" />
+    <EmbeddedResource Include="Images\Main\fingerprint.png" />
     <EmbeddedResource Include="Images\Main\liarsdice.png" />
     <EmbeddedResource Include="Images\Main\seven.png" />
     <EmbeddedResource Include="Images\Main\streep.png" />
     <EmbeddedResource Include="Images\Main\token.png" />
     <EmbeddedResource Include="Images\Main\wheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\arrow.png" />
+    <EmbeddedResource Include="Images\WheelOfFortune\centerWheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel2.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel3.png" />
@@ -156,6 +162,7 @@
   <ItemGroup>
     <PackageReference Include="morelinq" Version="3.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
