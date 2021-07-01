@@ -1,4 +1,5 @@
-﻿using LibraryWindow.Classes.enums.card;
+﻿using LibraryWindow.classes.Main;
+using LibraryWindow.Classes.enums.card;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,6 +61,11 @@ namespace LibraryWindow.Classes.Main
 			}
 		}
 
+		public string SelectedCardskin
+		{
+			get { return User.SelectedCardskin; }
+		}
+
 		private CardBackColor _backColor;
 
 		public CardBackColor BackColor
@@ -70,7 +76,7 @@ namespace LibraryWindow.Classes.Main
 
 		public ImageSource ImageURL
 		{
-			get { return ImageSource.FromResource($"LibraryWindow.Images.Cards.{Value}{Type}.png"); }
+			get { return ImageSource.FromResource($"LibraryWindow.Images.Cards.{SelectedCardskin}.{Value}{Type}.png"); }
 		}
 
 		public ImageSource BackURL
@@ -79,11 +85,11 @@ namespace LibraryWindow.Classes.Main
 			{
 				if (BackColor == CardBackColor.Blue)
 				{
-					return ImageSource.FromResource($"LibraryWindow.Images.Cards.BackBlue.png");
+					return ImageSource.FromResource($"LibraryWindow.Images.Cards.{SelectedCardskin}.BackBlue.png");
 				}
 				else
 				{
-					return ImageSource.FromResource($"LibraryWindow.Images.Cards.BackRed.png");
+					return ImageSource.FromResource($"LibraryWindow.Images.Cards.{SelectedCardskin}.BackRed.png");
 				}
 			}
 		}
