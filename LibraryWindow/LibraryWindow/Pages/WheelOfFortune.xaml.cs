@@ -237,6 +237,8 @@ namespace LibraryWindow.Pages
                 {
                     if (Tokens >= 65)
                     {
+                        WinAmount += (int)(WinAmount * 0.1);
+
                         blnShouldStay = true;
                         await ApiWrapper.UpdateTokens(-65, _sender);
                         await ApiWrapper.GetUserInfo();
@@ -292,7 +294,7 @@ namespace LibraryWindow.Pages
                 }
                 else
                 {
-                    WinAmount += (int)Math.Floor(uitkomsten2[(int)a] * 1.1);
+                    WinAmount += (int)Math.Floor(uitkomsten2[(int)a] * 1.0);
                 }
             }
             else if (GameCount == 3)
@@ -303,7 +305,7 @@ namespace LibraryWindow.Pages
                 }
                 else
                 {
-                    WinAmount += (int)Math.Floor(uitkomsten3[(int)a] * 1.2);
+                    WinAmount += (int)Math.Floor(uitkomsten3[(int)a] * 1.0);
                 }
             }
             else if (GameCount == 4)
@@ -314,7 +316,7 @@ namespace LibraryWindow.Pages
                 }
                 else
                 {
-                    WinAmount += (int)Math.Floor(uitkomsten4[(int)a] * 1.3);
+                    WinAmount += (int)Math.Floor(uitkomsten4[(int)a] * 1.0);
                 }
             }
             else if (GameCount >= 5)
@@ -326,10 +328,11 @@ namespace LibraryWindow.Pages
                 else
                 {
                     WinAmount += uitkomsten5[(int)a];
+                    GameCount = 5;
                 }
             }
 
-            if (WinAmount - verschil < 0)
+            if (WinAmount - verschil <= 0)
             {
                 CurrentWin = "Bankrupt!";
             }
@@ -337,7 +340,6 @@ namespace LibraryWindow.Pages
             {
                 CurrentWin = $"+{WinAmount - verschil}";
             }
-
 
             MyStartPoint = (MyAngle / 360) + (MyAngle % 360) - (7.5 / 2);
 

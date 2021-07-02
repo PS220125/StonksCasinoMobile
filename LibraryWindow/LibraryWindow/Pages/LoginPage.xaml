@@ -43,13 +43,13 @@
                             <Label Text="Onthoud mij" VerticalOptions="Center" TextColor="White"/>
                         </StackLayout>
 
-                        <Grid Grid.Row="4">
+                        <Grid Grid.Row="4" x:Name="gridLogin">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <ImageButton Pressed="FingerprintButton_Pressed" Grid.Column="1" BackgroundColor="Transparent" Source="{local:ImageResource LibraryWindow.Images.Main.fingerprint.png}" />
-                            <Button Grid.Column="0" Pressed="Button_Pressed" CornerRadius="50" BackgroundColor="DarkGreen" Text="login"/>
+                            <ImageButton x:Name="imgFinger" Pressed="FingerprintButton_Pressed" Grid.Column="1" BackgroundColor="Transparent" Source="{local:ImageResource LibraryWindow.Images.Main.fingerprint.png}" />
+                            <Button x:Name="btnLogin" Grid.Column="0" Pressed="Button_Pressed" CornerRadius="50" BackgroundColor="DarkGreen" Text="login"/>
                         </Grid>
                     </Grid>
                 </Frame>

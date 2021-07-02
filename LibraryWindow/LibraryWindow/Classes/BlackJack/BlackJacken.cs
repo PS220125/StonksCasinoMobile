@@ -288,7 +288,8 @@ namespace LibraryWindow.Classes.BlackJack
         {
             try
             {
-            await ApiWrapper.UpdateTokens(MyAantal * 2, _sender);
+                int a = MyAantal * 2;
+                await ApiWrapper.UpdateTokens(MyAantal * 2, _sender);
             }
             catch
             {
@@ -314,7 +315,8 @@ namespace LibraryWindow.Classes.BlackJack
         {
             try
             {
-            await ApiWrapper.UpdateTokens(MyAantal * 2, _sender);
+                int a = MyAantal * 2;
+                await ApiWrapper.UpdateTokens(a, _sender);
             }
             catch
             {
