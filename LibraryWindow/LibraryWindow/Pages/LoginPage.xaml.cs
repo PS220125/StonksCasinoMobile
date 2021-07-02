@@ -100,6 +100,8 @@ namespace LibraryWindow.Pages
                     {
                         RememberMe();
                     }
+                    //await Navigation.PopAsync();
+                    //await Navigation.PopToRootAsync();
                     await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
                 }
                 else if (result == "active")
@@ -117,6 +119,8 @@ namespace LibraryWindow.Pages
                         {
                             RememberMe();
                         }
+                        //await Navigation.PopAsync();
+                        //await Navigation.PopToRootAsync();
                         await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
                     }
                 }

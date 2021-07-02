@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -77,6 +78,10 @@ namespace LibraryWindow.Pages
 
         private async void Uitloggen_Pressed(object sender, EventArgs e)
         {
+            Preferences.Remove("user_name");
+            Preferences.Remove("pass_word");
+            Preferences.Remove("remember");
+
             try
             {
                 bool logout = await User.LogoutAsync();
