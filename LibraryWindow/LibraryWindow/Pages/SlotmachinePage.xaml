@@ -30,7 +30,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Source="{local:ImageResource LibraryWindow.Images.Main.background.png}" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
+            <Image Source="{local:ImageResource LibraryWindow.Images.Main.background.png}" Grid.RowSpan="2" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Image>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
@@ -39,10 +39,12 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1" HeightRequest="500">
+                <Grid Grid.Row="1" Grid.RowSpan="3" HeightRequest="600">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -51,9 +53,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="150"></RowDefinition>
-                        <RowDefinition Height="150"></RowDefinition>
-                        <RowDefinition Height="150"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent" BorderColor="Black">
                         <Image Source="{Binding Slotmachine.SlotRows[0].Slots[0].ImageURL, Mode=OneWay}"/>
@@ -83,7 +85,8 @@
                         <Image Source="{Binding Slotmachine.SlotRows[2].Slots[2].ImageURL, Mode=OneWay}"/>
                     </Frame>
                 </Grid>
-                <Button Text="Game on" FontSize="20px" BackgroundColor="Black" Pressed="BtnStart_Pressed" Grid.Row="0" Grid.Column="1"></Button>
+                <Button Text="?" FontSize="Small" TextColor="White" Background="Black" WidthRequest="5" Grid.Row="1" Grid.Column="1"></Button>
+                <Button Text="Game on" FontSize="Small" TextColor="White" BackgroundColor="Black" Pressed="BtnStart_Pressed" Grid.Row="3" Grid.Column="1"></Button>
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Windows.UI.Xaml;
 
 namespace LibraryWindow.Pages
 {
@@ -107,6 +108,10 @@ namespace LibraryWindow.Pages
 
 
 
+
+
+
+
         private const string _sender = "Slotmachine";
 
         private Slotmachine _slotmachine = new Slotmachine();
@@ -129,6 +134,7 @@ namespace LibraryWindow.Pages
         private async void BtnStart_Pressed(object sender, EventArgs e)
         {
             DisableButtons();
+            await ApiWrapper.UpdateTokens(-100, _sender);
 
             await Slotmachine.Activate();
 
@@ -136,6 +142,7 @@ namespace LibraryWindow.Pages
             if (winnings > 0)
             {
                 //MessageBox.Show($"u heeft {winnings} gewonnen");
+                //DisplayAlert($"BlackJack", "Je hebt gewonnen!", "OK");
                 await ApiWrapper.UpdateTokens(winnings, _sender);
             }
             Check();
@@ -155,5 +162,7 @@ namespace LibraryWindow.Pages
                 AllowedToClick = true;
             }
         }
+
+
     }
 }

@@ -10,7 +10,7 @@ namespace LibraryWindow.Classes.Slotmachine
     {
         public ImageSource ImageURL
         {
-            get { return ImageSource.FromResource($"LibraryWindow.Image.Slotmachine.{Name}.png"); }
+            get { return ImageSource.FromResource($"LibraryWindow.Images.Slotmachine.{Name}.png"); }
         }
         //ImageSource.FromResource("SlotMachine.Image.background.png");
 
