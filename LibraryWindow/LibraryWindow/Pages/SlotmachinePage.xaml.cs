@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Windows.UI.Xaml;
 
 namespace LibraryWindow.Pages
 {
