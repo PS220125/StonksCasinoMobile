@@ -234,6 +234,11 @@ namespace LibraryWindow.Pages
 
         private async void Btn_Draai_Pressed(object sender, EventArgs e)
         {
+            Play();
+        }
+
+        private async void Play()
+        {
             if (!draaiPressed)
             {
                 draaiPressed = true;
@@ -272,6 +277,45 @@ namespace LibraryWindow.Pages
                     await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
                     await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
                 }
+            }
+        }
+
+        private void OnSwiped0(object sender, SwipedEventArgs e)
+        {
+            switch (e.Direction)
+            {
+                case SwipeDirection.Left:
+                    // Handle the swipe
+                    break;
+                case SwipeDirection.Right:
+                    // Handle the swipe
+                    break;
+                case SwipeDirection.Up:
+                    // Handle the swipe
+                    Play();
+                    break;
+                case SwipeDirection.Down:
+                    // Handle the swipe
+                    break;
+            }
+        }
+        private void OnSwiped(object sender, SwipedEventArgs e)
+        {
+            switch (e.Direction)
+            {
+                case SwipeDirection.Left:
+                    // Handle the swipe
+                    break;
+                case SwipeDirection.Right:
+                    // Handle the swipe
+                    break;
+                case SwipeDirection.Up:
+                    // Handle the swipe
+                    break;
+                case SwipeDirection.Down:
+                    // Handle the swipe
+                    Play();
+                    break;
             }
         }
 
