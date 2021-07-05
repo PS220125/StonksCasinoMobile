@@ -1,5 +1,6 @@
 ﻿using LibraryWindow.classes.Api;
 using LibraryWindow.classes.Main;
+using LibraryWindow.Classes.Slotmachine;
 using LibraryWindow.Classes.Main;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Windows.UI.Xaml;
 
 namespace LibraryWindow.Pages
 {
@@ -102,5 +104,65 @@ namespace LibraryWindow.Pages
         {
             Device.OpenUri(new Uri("https://stonkscasino.nl/public/account-info"));
         }
+
+
+
+
+
+
+
+
+        private const string _sender = "Slotmachine";
+
+        private Slotmachine _slotmachine = new Slotmachine();
+
+        public Slotmachine Slotmachine
+        {
+            get { return _slotmachine; }
+            set { _slotmachine = value; OnPropertyChanged(); }
+        }
+
+
+        private bool _allowedToClick = true;
+
+        public bool AllowedToClick
+        {
+            get { return _allowedToClick; }
+            set { _allowedToClick = value; OnPropertyChanged(); }
+        }
+
+        private async void BtnStart_Pressed(object sender, EventArgs e)
+        {
+            DisableButtons();
+            await ApiWrapper.UpdateTokens(-100, _sender);
+
+            await Slotmachine.Activate();
+
+            int winnings = Slotmachine.CheckWin();
+            if (winnings > 0)
+            {
+                //MessageBox.Show($"u heeft {winnings} gewonnen");
+                //DisplayAlert($"BlackJack", "Je hebt gewonnen!", "OK");
+                await ApiWrapper.UpdateTokens(winnings, _sender);
+            }
+            Check();
+        }
+        private void DisableButtons()
+        {
+            AllowedToClick = false;
+        }
+        public void Check()
+        {
+            if (User.Tokens < 100)
+            {
+                AllowedToClick = false;
+            }
+            else
+            {
+                AllowedToClick = true;
+            }
+        }
+
+
     }
 }

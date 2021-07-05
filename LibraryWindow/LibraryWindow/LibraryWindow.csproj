@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -295,6 +295,18 @@
     <None Remove="Images\Main\token.png" />
     <None Remove="Images\Main\wheel.png" />
     <None Remove="Images\Seven.png" />
+    <None Remove="Images\Slotmachine\background.png" />
+    <None Remove="Images\Slotmachine\Bal.png" />
+    <None Remove="Images\Slotmachine\Bar.png" />
+    <None Remove="Images\Slotmachine\bell.png" />
+    <None Remove="Images\Slotmachine\Cherry.png" />
+    <None Remove="Images\Slotmachine\Diamond.png" />
+    <None Remove="Images\Slotmachine\Grape.png" />
+    <None Remove="Images\Slotmachine\Lever.png" />
+    <None Remove="Images\Slotmachine\Melon.png" />
+    <None Remove="Images\Slotmachine\Orange.png" />
+    <None Remove="Images\Slotmachine\Seven.png" />
+    <None Remove="Images\Slotmachine\Star.png" />
     <None Remove="Images\wheel.png" />
     <None Remove="Images\WheelOfFortune\arrow.png" />
     <None Remove="Images\WheelOfFortune\centerWheel.png" />
@@ -590,6 +602,18 @@
     <EmbeddedResource Include="Images\Main\streep.png" />
     <EmbeddedResource Include="Images\Main\token.png" />
     <EmbeddedResource Include="Images\Main\wheel.png" />
+    <EmbeddedResource Include="Images\Slotmachine\background.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Bal.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Bar.png" />
+    <EmbeddedResource Include="Images\Slotmachine\bell.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Cherry.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Diamond.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Grape.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Lever.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Melon.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Orange.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Seven.png" />
+    <EmbeddedResource Include="Images\Slotmachine\Star.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\arrow.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\centerWheel.png" />
     <EmbeddedResource Include="Images\WheelOfFortune\wheel.png" />
@@ -605,6 +629,12 @@
     <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Windows.Foundation.UniversalApiContract">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\References\10.0.19041.0\Windows.Foundation.UniversalApiContract\10.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
