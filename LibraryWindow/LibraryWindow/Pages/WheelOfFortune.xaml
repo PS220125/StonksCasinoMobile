@@ -71,13 +71,11 @@
         <Grid Margin="50,0" x:Name="gridRules" IsVisible="false">
             <Frame BackgroundColor="Black" WidthRequest="400" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Center">
                 <StackLayout Background="DarkGreen" Spacing="2" HorizontalOptions="Center" VerticalOptions="Center" Padding="10">
-                    <Label TextColor="White" Text="Ronde 1: Het getal wat je draait komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 2: Het getal wat je draait +10% komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 3: Het getal wat je draait +20% komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 4: Het getal wat je draait +30% komt in de pot."/>
-                    <Label TextColor="White" Text="Ronde 5: Het getal wat je draait komt in de pot."/>
-                    <Label TextColor="White" Text="Als je op bankrupt komt wordt de pot terug gezet naar 0. Als je op de stop knop drukt wordt het spel terug gezet naar ronde 1, de pot waarde wordt op je account bijgeschreven."/>
-                    <Label TextColor="White" Text="Elke keer als je op de draai knop klikt kost het je 65 tokens."/>
+                    <Label TextColor="White" FontSize="12" Text="-Het getal wat je draait komt in de pot."/>
+                    <Label TextColor="White" FontSize="12" Text="-Elke ronde wordt de pot verhoogd met 10%."/>
+                    <Label TextColor="White" FontSize="12" Text="-Als je op bankrupt komt wordt de pot terug gezet naar 0."/>
+                    <Label TextColor="White" FontSize="12" Text="-Als je op de stop knop drukt wordt het spel terug gezet naar ronde 1, de pot waarde wordt dan op je account bijgeschreven."/>
+                    <Label TextColor="White" FontSize="12" Text="-Elke keer als je op de draai knop klikt kost het je 65 tokens."/>
                 </StackLayout>
             </Frame>
         </Grid>
