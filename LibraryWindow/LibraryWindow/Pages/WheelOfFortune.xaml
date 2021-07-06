@@ -46,6 +46,30 @@
                 <Image Grid.Row="1" Source="{Binding WheelImg, Mode=OneWay}" Margin="0,-15,0,25" x:Name="imgWheel" Rotation="7.5"/>
                 <Image Grid.Row="1" Source="{local:ImageResource LibraryWindow.Images.WheelOfFortune.centerWheel.png}" Margin="0,-15,0,25"/>
                 <Image Grid.Row="0" Source="{local:ImageResource LibraryWindow.Images.WheelOfFortune.arrow.png}" />
+
+                <Grid Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView Grid.Column="0" Color="Transparent" VerticalOptions="FillAndExpand">
+                        <BoxView.GestureRecognizers>
+                            <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped0"/>
+                            <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped0"/>
+                            <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped0"/>
+                            <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped0"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                    <BoxView Grid.Column="1" Color="Transparent" VerticalOptions="FillAndExpand">
+                        <BoxView.GestureRecognizers>
+                            <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                            <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                            <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                            <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                </Grid>
             </Grid>
 
             <StackLayout Grid.Column="1" Margin="0,0,75,0" VerticalOptions="Center">

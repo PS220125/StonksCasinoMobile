@@ -287,6 +287,13 @@
     <None Remove="Images\Cards\TwoDiamonds.png" />
     <None Remove="Images\Cards\TwoHearts.png" />
     <None Remove="Images\Cards\TwoSpades.png" />
+    <None Remove="Images\Lairsdice\cup2.png" />
+    <None Remove="Images\Lairsdice\Dice\1.png" />
+    <None Remove="Images\Lairsdice\Dice\2.png" />
+    <None Remove="Images\Lairsdice\Dice\3.png" />
+    <None Remove="Images\Lairsdice\Dice\4.png" />
+    <None Remove="Images\Lairsdice\Dice\5.png" />
+    <None Remove="Images\Lairsdice\Dice\6.png" />
     <None Remove="Images\liarsdice.png" />
     <None Remove="Images\Main\Account.png" />
     <None Remove="Images\Main\backArrow.png" />
@@ -592,6 +599,13 @@
     <EmbeddedResource Include="Images\Cards\SilverGold\Twodiamondsss.png" />
     <EmbeddedResource Include="Images\Cards\SilverGold\TwoHearts.png" />
     <EmbeddedResource Include="Images\Cards\SilverGold\TwoSpades.png" />
+    <EmbeddedResource Include="Images\Lairsdice\cup2.png" />
+    <EmbeddedResource Include="Images\Lairsdice\Dice\1.png" />
+    <EmbeddedResource Include="Images\Lairsdice\Dice\2.png" />
+    <EmbeddedResource Include="Images\Lairsdice\Dice\3.png" />
+    <EmbeddedResource Include="Images\Lairsdice\Dice\4.png" />
+    <EmbeddedResource Include="Images\Lairsdice\Dice\5.png" />
+    <EmbeddedResource Include="Images\Lairsdice\Dice\6.png" />
     <EmbeddedResource Include="Images\Main\account.png" />
     <EmbeddedResource Include="Images\Main\backArrow.png" />
     <EmbeddedResource Include="Images\Main\background.png" />
