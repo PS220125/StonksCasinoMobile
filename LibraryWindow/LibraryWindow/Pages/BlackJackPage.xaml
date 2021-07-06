@@ -108,7 +108,7 @@
                         <RowDefinition Height="1.6*"></RowDefinition>
                         <RowDefinition Height="1.6*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Editor IsEnabled="{Binding Game.Tokendrop, Mode=TwoWay}" Text="{Binding Game.MyAantal, Mode=TwoWay}" VerticalOptions="Center" WidthRequest="50" HeightRequest="250" Grid.Row="1" TextColor="Black" Background="white" FontSize="15" Keyboard="Numeric"></Editor>
+                    <Entry IsEnabled="{Binding Game.Tokendrop, Mode=TwoWay}" Text="{Binding Game.MyAantal, Mode=TwoWay}" VerticalOptions="Center" WidthRequest="50" HeightRequest="250" Grid.Row="1" TextColor="Black" FontSize="15" Keyboard="Numeric" HorizontalTextAlignment="Center"></Entry>
                     <Button IsEnabled="{Binding Game.Deals, Mode=TwoWay}" Pressed="Deal_click" WidthRequest="60" HeightRequest="35" Grid.Row="3" Background="lightgray" Text="Deal" FontSize="10" TextColor="Black"></Button>
                     <Button IsEnabled="{Binding Game.Hit, Mode=TwoWay}" Pressed="Hit_Click" WidthRequest="60" HeightRequest="35" Grid.Row="4" Background="lightgray" Text="Hit" FontSize="10" TextColor="Black"></Button>
                 </Grid>
