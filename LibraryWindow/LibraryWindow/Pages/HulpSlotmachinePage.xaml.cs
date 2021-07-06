@@ -16,7 +16,7 @@ using Xamarin.Forms.Xaml;
 namespace LibraryWindow.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SlotmachinePage : ContentPage, INotifyPropertyChanged
+    public partial class HulpSlotmachinePage : ContentPage, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -34,12 +34,11 @@ namespace LibraryWindow.Pages
             get { return User.Tokens; }
         }
 
-        public SlotmachinePage()
+        public HulpSlotmachinePage()
         {
             InitializeComponent();
             BindingContext = this;
             Account();
-            Check();
 
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
@@ -56,7 +55,6 @@ namespace LibraryWindow.Pages
                 return true;
             });
         }
-
         private async void Account()
         {
             try
@@ -107,69 +105,6 @@ namespace LibraryWindow.Pages
         private void Deposit_Pressed(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("https://stonkscasino.nl/public/account-info"));
-        }
-
-
-        private const string _sender = "Slotmachine";
-
-        private Slotmachine _slotmachine = new Slotmachine();
-
-        public Slotmachine Slotmachine
-        {
-            get { return _slotmachine; }
-            set { _slotmachine = value; OnPropertyChanged(); }
-        }
-
-
-        private bool _allowedToClick = true;
-
-        public bool AllowedToClick
-        {
-            get { return _allowedToClick; }
-            set { _allowedToClick = value; OnPropertyChanged(); }
-        }
-
-        private async void BtnStart_Pressed(object sender, EventArgs e)
-        {  
-            if(Tokens >= 100)
-            {
-                AllowedToClick = false;
-                await ApiWrapper.UpdateTokens(-100, _sender);
-
-                await Slotmachine.Activate();
-
-                int winnings = Slotmachine.CheckWin();
-                if (winnings > 0)
-                {
-                    //MessageBox.Show($"u heeft {winnings} gewonnen");
-                    //DisplayAlert($"BlackJack", "Je hebt gewonnen!", "OK");
-                    await ApiWrapper.UpdateTokens(winnings, _sender);
-                }
-                AllowedToClick = true;
-                Check();
-            }
-        }
-
-        private void Check()
-        {
-            if (Tokens >= 100)
-            {
-                AllowedToClick = true;
-            }
-            else
-            {
-                AllowedToClick = false;
-            }
-        }
-
-        //private void DisableButtons()
-        //{
-        //    AllowedToClick = false;
-        //}
-
-        private async void Help_Pressed(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new HulpSlotmachinePage());
         }
     }
 }

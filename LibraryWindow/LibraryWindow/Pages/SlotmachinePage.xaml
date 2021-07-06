@@ -85,8 +85,8 @@
                         <Image Source="{Binding Slotmachine.SlotRows[2].Slots[2].ImageURL, Mode=OneWay}"/>
                     </Frame>
                 </Grid>
-                <Button Text="?" FontSize="Small" TextColor="White" Background="Black" WidthRequest="5" Grid.Row="1" Grid.Column="1"></Button>
-                <Button Text="Game on" FontSize="Small" TextColor="White" BackgroundColor="Black" Pressed="BtnStart_Pressed" Grid.Row="3" Grid.Column="1"></Button>
+                <Button Text="?" FontSize="Small" TextColor="White" Background="Black" Pressed="Help_Pressed" WidthRequest="5" Grid.Row="1" Grid.Column="1"></Button>
+                <Button Text="Game on" FontSize="Small" TextColor="White" BackgroundColor="Black" Pressed="BtnStart_Pressed" Grid.Row="3" Grid.Column="1" IsEnabled="{Binding AllowedToClick, Mode=OneWay}"></Button>
             </Grid>
         </Grid>
     </ContentPage.Content>
