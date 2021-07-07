@@ -130,23 +130,32 @@ namespace LibraryWindow.Pages
         }
 
         private async void BtnStart_Pressed(object sender, EventArgs e)
-        {  
-            if(Tokens >= 100)
+        {
+            try
             {
-                AllowedToClick = false;
-                await ApiWrapper.UpdateTokens(-50, _sender);
-
-                await Slotmachine.Activate();
-
-                int winnings = Slotmachine.CheckWin();
-                if (winnings > 0)
+                if (Tokens >= 100)
                 {
-                    await DisplayAlert($"winnings", "Je hebt " + winnings + " gewonnen", "OK");
-                    await ApiWrapper.UpdateTokens(winnings, _sender);
+                    AllowedToClick = false;
+                    await ApiWrapper.UpdateTokens(-50, _sender);
+
+                    await Slotmachine.Activate();
+
+                    int winnings = Slotmachine.CheckWin();
+                    if (winnings > 0)
+                    {
+                        await DisplayAlert($"winnings", "Je hebt " + winnings + " gewonnen", "OK");
+                        await ApiWrapper.UpdateTokens(winnings, _sender);
+                    }
+                    AllowedToClick = true;
+                    Check();
                 }
-                AllowedToClick = true;
-                Check();
             }
+            catch (Exception)
+            {
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+            }
+
         }
 
         private async void Check()
