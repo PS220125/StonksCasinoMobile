@@ -16,7 +16,7 @@ using Xamarin.Forms.Xaml;
 namespace LibraryWindow.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SlotmachinePage : ContentPage, INotifyPropertyChanged
+    public partial class HulpSlotmachinePage : ContentPage, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -34,12 +34,11 @@ namespace LibraryWindow.Pages
             get { return User.Tokens; }
         }
 
-        public SlotmachinePage()
+        public HulpSlotmachinePage()
         {
             InitializeComponent();
             BindingContext = this;
             Account();
-            Check();
 
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
@@ -56,7 +55,6 @@ namespace LibraryWindow.Pages
                 return true;
             });
         }
-
         private async void Account()
         {
             try
@@ -107,73 +105,6 @@ namespace LibraryWindow.Pages
         private void Deposit_Pressed(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("https://stonkscasino.nl/public/account-info"));
-        }
-
-
-        private const string _sender = "Slotmachine";
-
-        private Slotmachine _slotmachine = new Slotmachine();
-
-        public Slotmachine Slotmachine
-        {
-            get { return _slotmachine; }
-            set { _slotmachine = value; OnPropertyChanged(); }
-        }
-
-
-        private bool _allowedToClick = true;
-
-        public bool AllowedToClick
-        {
-            get { return _allowedToClick; }
-            set { _allowedToClick = value; OnPropertyChanged(); }
-        }
-
-        private async void BtnStart_Pressed(object sender, EventArgs e)
-        {  
-            if(Tokens >= 100)
-            {
-                AllowedToClick = false;
-                await ApiWrapper.UpdateTokens(-100, _sender);
-
-                await Slotmachine.Activate();
-
-                int winnings = Slotmachine.CheckWin();
-                if (winnings > 0)
-                {
-                    await DisplayAlert($"winnings", "Je hebt " + winnings + " gewonnen", "OK");
-                    await ApiWrapper.UpdateTokens(winnings, _sender);
-                }
-                AllowedToClick = true;
-                Check();
-            }
-        }
-
-        private async void Check()
-        {
-            try
-            {
-                bool result = await ApiWrapper.GetUserInfo();
-                OnPropertyChanged("Tokens");
-                if (Tokens >= 100)
-                {
-                    AllowedToClick = true;
-                }
-                else
-                {
-                    AllowedToClick = false;
-                }
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
-                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
-            }
-        }
-
-        private async void Help_Pressed(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new HulpSlotmachinePage());
         }
     }
 }
