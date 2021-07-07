@@ -327,6 +327,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\Slotmachine\Cherry.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Images\Cards\Amethist\AceClubs.png" />
     <EmbeddedResource Include="Images\Cards\Amethist\AceDiamonds.png" />
     <EmbeddedResource Include="Images\Cards\Amethist\AceHearts.png" />
@@ -622,7 +626,6 @@
     <EmbeddedResource Include="Images\Slotmachine\Bal.png" />
     <EmbeddedResource Include="Images\Slotmachine\Bar.png" />
     <EmbeddedResource Include="Images\Slotmachine\bell.png" />
-    <EmbeddedResource Include="Images\Slotmachine\Cherry.png" />
     <EmbeddedResource Include="Images\Slotmachine\Diamond.png" />
     <EmbeddedResource Include="Images\Slotmachine\Grape.png" />
     <EmbeddedResource Include="Images\Slotmachine\Lever.png" />

@@ -68,9 +68,9 @@
                 <Label Text="= 200" TextColor="White" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
             </StackLayout>
             <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                <Image WidthRequest="50" Source="{local:ImageResource LibraryWindow.Images.Slotmachine.Cherry.png}"/>
-                <Image WidthRequest="50" Source="{local:ImageResource LibraryWindow.Images.Slotmachine.Cherry.png}"/>
-                <Image WidthRequest="50" Source="{local:ImageResource LibraryWindow.Images.Slotmachine.Cherry.png}"/>
+                <Image WidthRequest="100" Source="{local:ImageResource LibraryWindow.Images.Slotmachine.Cherry.png}"/>
+                <Image WidthRequest="100" Source="{local:ImageResource LibraryWindow.Images.Slotmachine.Cherry.png}"/>
+                <Image WidthRequest="100" Source="{local:ImageResource LibraryWindow.Images.Slotmachine.Cherry.png}"/>
                 <Label Text="= 100" TextColor="White" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
             </StackLayout>
         </Grid>
