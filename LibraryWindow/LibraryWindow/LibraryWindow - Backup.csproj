@@ -300,7 +300,6 @@
     <None Remove="Images\Main\blackjacklogo.png" />
     <None Remove="Images\Main\fingerprint.png" />
     <None Remove="Images\Main\liarsdice.png" />
-    <None Remove="Images\Main\seven.png" />
     <None Remove="Images\Main\streep.png" />
     <None Remove="Images\Main\token.png" />
     <None Remove="Images\Main\wheel.png" />
@@ -325,6 +324,10 @@
     <None Remove="Images\WheelOfFortune\wheel3.png" />
     <None Remove="Images\WheelOfFortune\wheel4.png" />
     <None Remove="Images\WheelOfFortune\wheel5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Slotmachine\Cherry.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -623,7 +626,6 @@
     <EmbeddedResource Include="Images\Slotmachine\Bal.png" />
     <EmbeddedResource Include="Images\Slotmachine\Bar.png" />
     <EmbeddedResource Include="Images\Slotmachine\bell.png" />
-    <EmbeddedResource Include="Images\Slotmachine\Cherry.png" />
     <EmbeddedResource Include="Images\Slotmachine\Diamond.png" />
     <EmbeddedResource Include="Images\Slotmachine\Grape.png" />
     <EmbeddedResource Include="Images\Slotmachine\Lever.png" />
