@@ -141,8 +141,7 @@ namespace LibraryWindow.Pages
                 int winnings = Slotmachine.CheckWin();
                 if (winnings > 0)
                 {
-                    //MessageBox.Show($"u heeft {winnings} gewonnen");
-                    //DisplayAlert($"BlackJack", "Je hebt gewonnen!", "OK");
+                    await DisplayAlert($"winnings", "Je hebt " + winnings + " gewonnen", "OK");
                     await ApiWrapper.UpdateTokens(winnings, _sender);
                 }
                 AllowedToClick = true;
@@ -150,22 +149,27 @@ namespace LibraryWindow.Pages
             }
         }
 
-        private void Check()
+        private async void Check()
         {
-            if (Tokens >= 100)
+            try
             {
-                AllowedToClick = true;
+                bool result = await ApiWrapper.GetUserInfo();
+                OnPropertyChanged("Tokens");
+                if (Tokens >= 100)
+                {
+                    AllowedToClick = true;
+                }
+                else
+                {
+                    AllowedToClick = false;
+                }
             }
-            else
+            catch (Exception)
             {
-                AllowedToClick = false;
+                await DisplayAlert("Check internet", "Mogelijk is de internetverbinding verbroken.", "OK");
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
-
-        //private void DisableButtons()
-        //{
-        //    AllowedToClick = false;
-        //}
 
         private async void Help_Pressed(object sender, EventArgs e)
         {
