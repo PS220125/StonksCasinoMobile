@@ -134,7 +134,7 @@ namespace LibraryWindow.Pages
             if(Tokens >= 100)
             {
                 AllowedToClick = false;
-                await ApiWrapper.UpdateTokens(-100, _sender);
+                await ApiWrapper.UpdateTokens(-50, _sender);
 
                 await Slotmachine.Activate();
 
@@ -155,7 +155,7 @@ namespace LibraryWindow.Pages
             {
                 bool result = await ApiWrapper.GetUserInfo();
                 OnPropertyChanged("Tokens");
-                if (Tokens >= 100)
+                if (Tokens >= 50)
                 {
                     AllowedToClick = true;
                 }
