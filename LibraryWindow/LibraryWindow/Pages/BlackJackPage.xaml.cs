@@ -259,8 +259,8 @@ namespace LibraryWindow.Pages
                     int Player = Game.Players[0].Score;
                     if (Player > 21)
                     {
-                        Game.Stands();
                         ComputerGame.ComputerDeal(Player);
+                        Game.Stands();
                         Endresult();
                     }
                 }

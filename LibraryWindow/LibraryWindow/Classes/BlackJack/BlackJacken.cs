@@ -137,7 +137,7 @@ namespace LibraryWindow.Classes.BlackJack
                 {
                     Deals = false;
                     SetPlayerHand(Players[0]);
-                    //Tokendrop = false;
+                    Tokendrop = false;
                     Dubbel = true;
                     Splitten = CheckSplit();
                     Standing = true;
